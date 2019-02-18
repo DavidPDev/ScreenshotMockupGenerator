@@ -14,8 +14,13 @@ The app can be run from command line so you can create a .bat file with all the 
 
 
 # Usage
+- todo -
 
 # Command line
+You can create a batch file (.bat) to automate the task. [Sample here](https://github.com/DavidPDev/ScreenshotMockupGenerator/blob/80126273ab63bf13b78a01be9682fb403a340894/Samples/generate.bat).
+
+# Version log
+1.0 18 FEB 2019. Initial release
 
 # Samples
 **Sample1:**

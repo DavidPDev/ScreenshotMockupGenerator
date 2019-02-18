@@ -7,7 +7,7 @@ C# Windows Application to create atractive screenshots using 4 elements:
 - Text
 
 <p align="center">
-  <img src="Samples/out/samples1.png" width="400">
+  <img src="docs/images/samples1.PNG" width="640">
 </p>
 
 The app can be run from command line so you can create a .bat file with all the screenshots for every languaje, device type, etc

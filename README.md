@@ -12,9 +12,40 @@ C# Windows Application to create atractive screenshots using 4 elements:
 
 The app can be run from command line so you can create a .bat file with all the screenshots for every languaje, device type, etc
 
-
 # Usage
-- todo -
+```
+    W=   width  
+    H=   height  
+    O=   output_file
+    OF=  format (PNG24|PNG32|JPG90|JPG80)
+
+    BF=  background_file 
+    BP=  background_position (*1) 
+            
+    DFD= device_file_device
+    DFS= device_file_screenshot
+    DS=  device_style (DrawTop|Stretch) 
+    DP=  device_position (*1) 
+    DC=  device_scale (*2) 
+            
+    TT=  text_text 
+    TP=  text_position (*1) 
+    TC1= text_color_fore (*3)
+    TC2= text_color_back (*3)
+    TS=  text_style (Simple|Shadow|Outline|Glow) 
+    TST= text_style_thickness (*2)
+    TF=  text_font (Windows font name) 
+    TC=  text_scale (*2)
+            
+    *1: Position format can be two parameters (px,py) in percentaje, 0.5 middle or four (px,py,alignx,aligny)
+        px,py  
+        px,py,Left|Center|Right,Top|Center|Bottom
+
+    *2: Scale and thickness: Default value is 1.0. 
+            2.0 will produce a double-scale effect (2x)
+
+    *3: Colors are in argb or rgb format: Example 0000FF -> Blue, FF404040 -> Dark gray
+```
 
 # Command line
 You can create a batch file (.bat) to automate the task. [Sample here](https://github.com/DavidPDev/ScreenshotMockupGenerator/blob/80126273ab63bf13b78a01be9682fb403a340894/Samples/generate.bat).

@@ -14,7 +14,7 @@ The application can be run from command line so you can create a .bat file with 
 
 It is conceived as a simple utility as I didn't find any existing application that made this work decently.
 
-I've used it to create the 7 screenshots of our company's App for Android phone + Android tablet + iPhone + iPad, in 3 different languajes: ***7*4*3=84 screenshots in a few seconds*** using a .bat script. The best part is that changing a screenshot, text, etc is just a few seconds of work.
+I've used it to create the 7 screenshots of our company's App for Android phone + Android tablet + iPhone + iPad, in 3 different languajes: 7 * 4 * 3 = ***84 screenshots in a few seconds*** using a .bat script. The best part is that changing a screenshot, text, etc is just a few seconds of work.
 
 # Disclaimers & TODOs
 - I'm not a C# developer so code may not be beautiful at all :)
@@ -68,8 +68,39 @@ List of commands (samples below):
 You can create a batch file (.bat) to automate the task. [Sample here](https://github.com/DavidPDev/ScreenshotMockupGenerator/blob/80126273ab63bf13b78a01be9682fb403a340894/Samples/generate.bat).
 
 # Tricks & Tips
-- I've created the background by my own using the Paint.Net great application, must be a square size (ex: 1000x1000)
+- I've created the backgrounds by my own using the Paint.Net great application, must be a square size (ex: 1000x1000)
 - The device-frame images have been obtained from other repositories or googleing
+- A great tip when creating a .bat file is the use of variables. Example:
+```
+chcp 1252
+set W="w=1242"
+set H="h=2208"
+set BF1="bf=D:\PROYECTS\DEVICES FRAMES\back1.png"
+set BF2="bf=D:\PROYECTS\DEVICES FRAMES\back2.png"
+set DFD="dfd=D:\PROYECTS\DEVICES FRAMES\iphone8_black.png"
+set DS="ds=DrawTop"
+set DP="dp=0.5,0.35"
+
+set TP="tp=0.5,0.09"
+set TC1="tc1=FFFFFFFF"
+set TC2="tc2=CC000000"
+set TS="ts=Shadow"
+set TF="tf=Cooper Black"
+set TC="tc=1.25"
+
+set TT1en="Text sample in english"
+set TT2en="Second slide text"
+set TT1es="Texto de ejemplo en español"
+set TT2es="Segundo texto"
+
+ScreenshotMockupGenerator.exe dfs=en\iphone\1.png o=en\iphone\D1.png %TT1en% %W% %H% %BF1% %DFD% %DS% %DP% %TP% %TC1% %TC2% %TS% %TF% %TC%
+ScreenshotMockupGenerator.exe dfs=en\iphone\2.png o=en\iphone\D2.png %TT2en% %W% %H% %BF2% %DFD% %DS% %DP% %TP% %TC1% %TC2% %TS% %TF% %TC%
+ScreenshotMockupGenerator.exe dfs=es\iphone\1.png o=es\iphone\D1.png %TT1es% %W% %H% %BF1% %DFD% %DS% %DP% %TP% %TC1% %TC2% %TS% %TF% %TC%
+ScreenshotMockupGenerator.exe dfs=es\iphone\2.png o=es\iphone\D2.png %TT2es% %W% %H% %BF2% %DFD% %DS% %DP% %TP% %TC1% %TC2% %TS% %TF% %TC%
+
+```
+
+# Code in C#
 - To find out the rectangle where the screenshot will fit, we just use the middle point of the frame image, then we go left and right, and top and bottom to find the limits of the transparent middle rectangle. C# function :
 ```csharp
   // Find limits of a frame -> Transparent rectangle in the center (middle of image)

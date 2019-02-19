@@ -10,20 +10,24 @@ C# Windows Application to create atractive screenshots using 4 elements:
   <img src="docs/images/samples1.PNG" width="640">
 </p>
 
-The application can be run from command line so you can create a .bat file with all the screenshots for every languaje, device type, etc
+The application can be run from command line so you can create a .bat file with all the screenshots for every languaje, device type, etc.
+
 It is conceived as a simple utility as I didn't find any existing application that made this work decently.
+
+I've used it to create the 7 screenshots of our company's App for Android phone + Android tablet + iPhone + iPad, in 3 different languajes: ***7*4*3=84 screenshots in a few seconds*** using a .bat script. The best part is that changing a screenshot, text, etc is just a few seconds of work.
 
 # Disclaimers & TODOs
 - I'm not a C# developer so code may not be beautiful at all :)
 - I'm not native English. That explains many things.
 - Maybe the code has very few comments... I prefer auto-documented code...
+- This is my first time publishing a "real" project on Github so don't blame me too much.
 - TODO: I'm too lazy to develop a Form with all the fields for each option. Maybe in a future I'll do it.
 - TODO: Error controls
 
 # Usage
 This utility has two operating modes:
 - ***Windowed/visual mode***: it uses a edit-box command line to preview quickly the images. When you have finished you can save your commands to create a .bat script.
-- ***Command line***: just call the .exe using all the arguments (may be a lot, but some are optional). Windows can use up to 8192 chrs in a command line.
+- ***Command line***: just call the .exe using all the arguments (may be a lot, but some are optional). Windows can use up to 8192 chars in a single command line.
 
 List of commands (samples below):
 ```
@@ -65,6 +69,7 @@ You can create a batch file (.bat) to automate the task. [Sample here](https://g
 
 # Tricks & Tips
 - I've created the background by my own using the Paint.Net great application, must be a square size (ex: 1000x1000)
+- The device-frame images have been obtained from other repositories or googleing
 - To find out the rectangle where the screenshot will fit, we just use the middle point of the frame image, then we go left and right, and top and bottom to find the limits of the transparent middle rectangle. C# function :
 ```csharp
   // Find limits of a frame -> Transparent rectangle in the center (middle of image)
@@ -101,8 +106,6 @@ You can create a batch file (.bat) to automate the task. [Sample here](https://g
       return Rectangle.Empty;
   }
 ```
-- The device frames have been obtained from other repositories or googleing
-- 
 
 # Version log
 1.0 18 FEB 2019. Initial release

@@ -10,9 +10,22 @@ C# Windows Application to create atractive screenshots using 4 elements:
   <img src="docs/images/samples1.PNG" width="640">
 </p>
 
-The app can be run from command line so you can create a .bat file with all the screenshots for every languaje, device type, etc
+The application can be run from command line so you can create a .bat file with all the screenshots for every languaje, device type, etc
+It is conceived as a simple utility as I didn't find any existing application that made this work decently.
+
+# Disclaimers & TODOs
+- I'm not a C# developer so code may not be beautiful at all :)
+- I'm not native English. That explains many things.
+- Maybe the code has very few comments... I prefer auto-documented code...
+- TODO: I'm too lazy to develop a Form with all the fields for each option. Maybe in a future I'll do it.
+- TODO: Error controls
 
 # Usage
+This utility has two operating modes:
+- ***Windowed/visual mode***: it uses a edit-box command line to preview quickly the images. When you have finished you can save your commands to create a .bat script.
+- ***Command line***: just call the .exe using all the arguments (may be a lot, but some are optional). Windows can use up to 8192 chrs in a command line.
+
+List of commands (samples below):
 ```
     W=   width  
     H=   height  
@@ -50,10 +63,55 @@ The app can be run from command line so you can create a .bat file with all the 
 # Command line
 You can create a batch file (.bat) to automate the task. [Sample here](https://github.com/DavidPDev/ScreenshotMockupGenerator/blob/80126273ab63bf13b78a01be9682fb403a340894/Samples/generate.bat).
 
+# Tricks & Tips
+- I've created the background by my own using the Paint.Net great application, must be a square size (ex: 1000x1000)
+- To find out the rectangle where the screenshot will fit, we just use the middle point of the frame image, then we go left and right, and top and bottom to find the limits of the transparent middle rectangle. C# function :
+```csharp
+  // Find limits of a frame -> Transparent rectangle in the center (middle of image)
+  public static Rectangle FindFrameLimits(Bitmap b)
+  {
+      int[] DX = { -1, 1, 0, 0 };
+      int[] DY = { 0, 0, -1, 1 };
+
+      if (b != null)
+      {
+          int cx = b.Width / 2;
+          int cy = b.Height / 2;
+          int x1 = cx, x2 = cx, y1 = cy, y2 = cy; // Limit points
+          for (int i = 0; i < 4; i++)
+          {
+              int x = cx, y = cy;
+              Color col;
+              do
+              {
+                  if (x < 0 || x >= b.Width || y < 0 || y >= b.Height) break;
+                  col = b.GetPixel(x, y);
+                  x += DX[i];
+                  y += DY[i];
+
+              } while (col.A <= 10);       // Almost trasparent
+
+              x1 = Math.Min(x1, x);
+              x2 = Math.Max(x2, x);
+              y1 = Math.Min(y1, y);
+              y2 = Math.Max(y2, y);
+          }
+          return new Rectangle(x1, y1, x2 - x1, y2 - y1);
+      }
+      return Rectangle.Empty;
+  }
+```
+- The device frames have been obtained from other repositories or googleing
+- 
+
 # Version log
 1.0 18 FEB 2019. Initial release
 
 # Samples
+| Sample 1 | Sample 2 | Sample 3 | Sample 4 |
+:---------:|:---------:|:---------:|:---------:
+![](docs/images/test1.png) | ![](docs/images/test2.png) | ![](docs/images/test3.png) | ![](docs/images/test4.png)
+
 **Sample1:**
 ```
 w=1242 h=2208 o="..\..\..\Samples\out\test1.png" dfs="..\..\..\Assets\screens\sample1.jpg" tt="Play the classic\nGAME now!" dc=0.9 dp=0.5,0.35  bf="..\..\..\Assets\backs\back1.png" dfd="..\..\..\Assets\devices\generic_phone1.png" ds=Stretch tp=0.5,0.10 tc1=FFFFFFFF tc2=FF000000 ts=Outline tf="Cooper Black" tc=1.35

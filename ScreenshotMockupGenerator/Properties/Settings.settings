@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="myparams" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ttttttt</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InitialLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
